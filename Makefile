@@ -3,8 +3,11 @@ ifndef GITHUB_ACTIONS
 	export PATH := $(GOROOT)/bin:$(PATH)
 endif
 
-test:
+test: fmt
 	go test -v
+
+fmt:
+	go fmt *.go
 
 modinit:
 	go mod init github.com/siongui/tamboongo
