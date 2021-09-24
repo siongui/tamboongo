@@ -1,4 +1,4 @@
-ifndef GITHUB_ACTIONS
+ifndef GOROOT
 	export GOROOT=$(realpath $(CURDIR)/../go)
 	export PATH := $(GOROOT)/bin:$(PATH)
 endif

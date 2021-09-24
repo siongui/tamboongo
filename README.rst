@@ -24,6 +24,19 @@ Development Environment:
   - `Go 1.17.1`_
 
 
+API Access
+++++++++++
+
+1. Login to `Test Dashboard <https://dashboard.omise.co/test/dashboard>`_ (Skip
+   sign up and create a test account)
+
+2. Use credit card information in test data to create tokens via
+   `Tokens API <https://www.omise.co/tokens-api>`_
+
+3. Make donations by creating charges via
+   `Charges API <https://www.omise.co/charges-api>`_
+
+
 UNLICENSE
 +++++++++
 

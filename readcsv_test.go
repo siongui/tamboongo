@@ -32,6 +32,9 @@ func TestReadCsv(t *testing.T) {
 	}
 
 	for _, record := range records {
-		t.Log(record)
+		if len(record) != 6 {
+			t.Error(record)
+			return
+		}
 	}
 }
