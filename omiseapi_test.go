@@ -24,19 +24,17 @@ func ExampleCreateToken(t *testing.T) {
 	}
 
 	for index, record := range records {
-		if index == 0 {
-			t.Log(record)
-			continue
-		}
 		if index > 5 {
 			break
 		}
 
 		t.Log(record)
 
-		err = CreateToken(client, record)
+		card, err := CreateToken(client, record)
 		if err != nil {
 			t.Error(err)
+		} else {
+			t.Log(card)
 		}
 	}
 }

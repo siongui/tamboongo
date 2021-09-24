@@ -2,7 +2,6 @@ package tamboongo
 
 import (
 	"errors"
-	"log"
 	"os"
 
 	"github.com/omise/omise-go"
@@ -26,7 +25,7 @@ func NewOmiseClient() (client *omise.Client, err error) {
 	return
 }
 
-func CreateToken(client *omise.Client, record CsvRecord) (err error) {
+func CreateToken(client *omise.Client, record CsvRecord) (card *omise.Card, err error) {
 	card, createToken := &omise.Card{}, &operations.CreateToken{
 		Name:            record.Name,
 		Number:          record.CCNumber,
@@ -35,11 +34,17 @@ func CreateToken(client *omise.Client, record CsvRecord) (err error) {
 		SecurityCode:    record.CVV,
 	}
 
-	if err = client.Do(card, createToken); err != nil {
-		return
+	err = client.Do(card, createToken)
+	return
+}
+
+func CreateCharge(client *omise.Client, amount int64, currency, tokenid string) (charge *omise.Charge, err error) {
+	charge, create := &omise.Charge{}, &operations.CreateCharge{
+		Amount:   amount,
+		Currency: currency,
+		Card:     tokenid,
 	}
 
-	log.Printf("created card: %#v\n", card)
-
+	err = client.Do(charge, create)
 	return
 }

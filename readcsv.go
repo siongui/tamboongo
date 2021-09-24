@@ -13,7 +13,7 @@ import (
 
 type CsvRecord struct {
 	Name           string
-	AmountSubunits int
+	AmountSubunits int64
 	CCNumber       string
 	CVV            string
 	ExpMonth       time.Month
@@ -21,7 +21,7 @@ type CsvRecord struct {
 }
 
 func NewRecord(record []string) (r CsvRecord, err error) {
-	amount, err := strconv.Atoi(record[1])
+	amount, err := strconv.ParseInt(record[1], 10, 64)
 	if err != nil {
 		err = errors.New(strings.Join(record, " ") + " fail to convert donation amount")
 		return
