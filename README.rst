@@ -37,6 +37,16 @@ API Access
    `Charge API <https://www.omise.co/charges-api>`_
 
 
+Usage
++++++
+
+.. code-block:: bash
+
+  $ export OmisePublicKey="your_omise_public_key_from_test_dashboard"
+  $ export OmiseSecretKey="your_omise_private_key_from_test_dashboard"
+  $ make
+
+
 UNLICENSE
 +++++++++
 
