@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func TestCreateToken(t *testing.T) {
+func ExampleCreateToken(t *testing.T) {
 	b, err := DecryptRot("fng.1000.csv.rot128")
 	if err != nil {
 		t.Error(err)

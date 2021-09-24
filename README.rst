@@ -31,10 +31,10 @@ API Access
    sign up and create a test account)
 
 2. Use credit card information in test data to create tokens via
-   `Tokens API <https://www.omise.co/tokens-api>`_
+   `Token API <https://www.omise.co/tokens-api>`_
 
 3. Make donations by creating charges via
-   `Charges API <https://www.omise.co/charges-api>`_
+   `Charge API <https://www.omise.co/charges-api>`_
 
 
 UNLICENSE
