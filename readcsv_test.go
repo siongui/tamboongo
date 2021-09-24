@@ -17,3 +17,21 @@ func TestDecryptRot(t *testing.T) {
 		return
 	}
 }
+
+func TestReadCsv(t *testing.T) {
+	b, err := DecryptRot("fng.1000.csv.rot128")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	records, err := ReadCsv(b)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	for _, record := range records {
+		t.Log(record)
+	}
+}
