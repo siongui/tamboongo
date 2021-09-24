@@ -25,16 +25,9 @@ func TestReadCsv(t *testing.T) {
 		return
 	}
 
-	records, err := ReadCsv(b)
+	_, err = ReadCsv(b)
 	if err != nil {
 		t.Error(err)
 		return
-	}
-
-	for _, record := range records {
-		if len(record) != 6 {
-			t.Error(record)
-			return
-		}
 	}
 }

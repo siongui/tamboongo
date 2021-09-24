@@ -4,7 +4,6 @@ import (
 	"errors"
 	"log"
 	"os"
-	"time"
 
 	"github.com/omise/omise-go"
 	"github.com/omise/omise-go/operations"
@@ -27,13 +26,13 @@ func NewOmiseClient() (client *omise.Client, err error) {
 	return
 }
 
-func CreateToken(client *omise.Client, name, number, cvv string, month time.Month, year int) (err error) {
+func CreateToken(client *omise.Client, record CsvRecord) (err error) {
 	card, createToken := &omise.Card{}, &operations.CreateToken{
-		Name:            name,
-		Number:          number,
-		ExpirationMonth: month,
-		ExpirationYear:  year,
-		SecurityCode:    cvv,
+		Name:            record.Name,
+		Number:          record.CCNumber,
+		ExpirationMonth: record.ExpMonth,
+		ExpirationYear:  record.ExpYear,
+		SecurityCode:    record.CVV,
 	}
 
 	if err = client.Do(card, createToken); err != nil {

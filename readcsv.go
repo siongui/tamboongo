@@ -6,7 +6,48 @@ import (
 	"errors"
 	"io"
 	"os"
+	"strconv"
+	"strings"
+	"time"
 )
+
+type CsvRecord struct {
+	Name           string
+	AmountSubunits int
+	CCNumber       string
+	CVV            string
+	ExpMonth       time.Month
+	ExpYear        int
+}
+
+func NewRecord(record []string) (r CsvRecord, err error) {
+	amount, err := strconv.Atoi(record[1])
+	if err != nil {
+		err = errors.New(strings.Join(record, " ") + " fail to convert donation amount")
+		return
+	}
+
+	month, err := strconv.Atoi(record[4])
+	if err != nil {
+		err = errors.New(strings.Join(record, " ") + " fail to convert month")
+		return
+	}
+
+	year, err := strconv.Atoi(record[5])
+	if err != nil {
+		err = errors.New(strings.Join(record, " ") + " fail to convert year")
+		return
+	}
+
+	return CsvRecord{
+		Name:           record[0],
+		AmountSubunits: amount,
+		CCNumber:       record[2],
+		CVV:            record[3],
+		ExpMonth:       time.Month(month),
+		ExpYear:        year,
+	}, err
+}
 
 func DecryptRot(filename string) (b []byte, err error) {
 	f, err := os.Open(filename)
@@ -41,7 +82,7 @@ func DecryptRot(filename string) (b []byte, err error) {
 	return
 }
 
-func ReadCsv(b []byte) (records [][]string, err error) {
+func ReadCsv(b []byte) (csvRecords []CsvRecord, err error) {
 	r := csv.NewReader(bytes.NewReader(b))
 	for {
 		record, err := r.Read()
@@ -49,10 +90,19 @@ func ReadCsv(b []byte) (records [][]string, err error) {
 			break
 		}
 		if err != nil {
-			return records, err
+			return csvRecords, err
 		}
 
-		records = append(records, record)
+		if record[0] == "Name" {
+			continue
+		}
+
+		csvRecord, err := NewRecord(record)
+		if err != nil {
+			return csvRecords, err
+		}
+
+		csvRecords = append(csvRecords, csvRecord)
 	}
 
 	return
