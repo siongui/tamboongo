@@ -1,3 +1,5 @@
+// Package tamboongo reads donation data and makes donations via Omise Token API
+// and Charge API.
 package tamboongo
 
 import (
@@ -5,6 +7,7 @@ import (
 	"sort"
 )
 
+// MakeDonations makes donations from row data and print summary at the end.
 func MakeDonations(records []CsvRecord) (err error) {
 	fmt.Println("performing donations...")
 

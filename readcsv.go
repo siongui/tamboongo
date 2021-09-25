@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// CsvRecord represents one row (donation) of the CSV
 type CsvRecord struct {
 	Name           string
 	AmountSubunits int64
@@ -20,6 +21,7 @@ type CsvRecord struct {
 	ExpYear        int
 }
 
+// NewRecord creates one CsvRecord from one row of the CSV
 func NewRecord(record []string) (r CsvRecord, err error) {
 	amount, err := strconv.ParseInt(record[1], 10, 64)
 	if err != nil {
@@ -49,6 +51,7 @@ func NewRecord(record []string) (r CsvRecord, err error) {
 	}, err
 }
 
+// DecryptRot decrypts the ROT-128 encrypted file.
 func DecryptRot(filename string) (b []byte, err error) {
 	f, err := os.Open(filename)
 	if err != nil {
@@ -82,6 +85,7 @@ func DecryptRot(filename string) (b []byte, err error) {
 	return
 }
 
+// ReadCsv reads the data in the CSV file.
 func ReadCsv(b []byte) (csvRecords []CsvRecord, err error) {
 	r := csv.NewReader(bytes.NewReader(b))
 	for {

@@ -8,6 +8,7 @@ import (
 	"github.com/omise/omise-go/operations"
 )
 
+// NewOmiseClient creates a new client to access Omise API.
 func NewOmiseClient() (client *omise.Client, err error) {
 	pkey, okpkey := os.LookupEnv("OmisePublicKey")
 	if !okpkey {
@@ -25,6 +26,7 @@ func NewOmiseClient() (client *omise.Client, err error) {
 	return
 }
 
+// CreateToken creates a token from credit card data via Token API.
 func CreateToken(client *omise.Client, record CsvRecord) (card *omise.Card, err error) {
 	card, createToken := &omise.Card{}, &operations.CreateToken{
 		Name:            record.Name,
@@ -38,6 +40,7 @@ func CreateToken(client *omise.Client, record CsvRecord) (card *omise.Card, err 
 	return
 }
 
+// CreateCharge creates a charge via Charge API.
 func CreateCharge(client *omise.Client, amount int64, currency, tokenid string) (charge *omise.Charge, err error) {
 	charge, create := &omise.Charge{}, &operations.CreateCharge{
 		Amount:   amount,
