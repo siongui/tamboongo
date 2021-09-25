@@ -40,11 +40,33 @@ API Access
 Usage
 +++++
 
+Get public and secret key from Omise. In root directory of this project,
+run:
+
 .. code-block:: bash
 
   $ export OmisePublicKey="your_omise_public_key_from_test_dashboard"
   $ export OmiseSecretKey="your_omise_private_key_from_test_dashboard"
   $ make
+
+The following is the output:
+
+.. code-block:: bash
+
+  go fmt *.go
+  go fmt commandline/*.go
+  cd commandline; go run tamboon.go -rot="../fng.1000.csv.rot128"
+  performing donations...
+  done.
+  total received:		 THB	 2686395103
+  successful donated:	 THB	 537625452
+  faulty donation:	 THB	 2148769651
+
+  average per person:	 THB	 2814792
+  top donors:
+  	Mrs. Mimosa R Tûk (THB 5075024)
+  	Mr. Falco S Bracegirdle (THB 5074457)
+  	Mrs. Pimpernel C Headstrong (THB 5068438)
 
 
 UNLICENSE
