@@ -8,6 +8,7 @@ import (
 )
 
 var rot = flag.String("rot", "", "A ROT-128 encrypted CSV file")
+var verbose = flag.Bool("verbose", false, "print more messages while performing actions")
 
 func main() {
 	flag.Parse()
@@ -24,7 +25,7 @@ func main() {
 		return
 	}
 
-	err = tamboongo.MakeDonations(records)
+	err = tamboongo.MakeDonations(records, *verbose)
 	if err != nil {
 		fmt.Println(err)
 		return

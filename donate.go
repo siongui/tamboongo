@@ -4,11 +4,12 @@ package tamboongo
 
 import (
 	"fmt"
+	"log"
 	"sort"
 )
 
 // MakeDonations makes donations from row data and print summary at the end.
-func MakeDonations(records []CsvRecord) (err error) {
+func MakeDonations(records []CsvRecord, verbose bool) (err error) {
 	fmt.Println("performing donations...")
 
 	client, err := NewOmiseClient()
@@ -25,22 +26,30 @@ func MakeDonations(records []CsvRecord) (err error) {
 		// create a token (credit card)
 		card, err := CreateToken(client, record)
 		if err != nil {
-			//log.Println(err)
+			if verbose {
+				log.Println(err)
+			}
 			failureDonatedAmount += record.AmountSubunits
 			failureCsvRecords = append(failureCsvRecords, record)
 			continue
 		}
-		//log.Printf("created card: %#v\n", card)
+		if verbose {
+			log.Printf("created card: %#v\n", card)
+		}
 
 		// make donation by creating a charge for the token (credit card)
 		charge, err := CreateCharge(client, record.AmountSubunits, "thb", card.Base.ID)
 		if err != nil {
-			//log.Println(err)
+			if verbose {
+				log.Println(err)
+			}
 			failureDonatedAmount += record.AmountSubunits
 			failureCsvRecords = append(failureCsvRecords, record)
 			continue
 		}
-		//log.Printf("created charge: %#v\n", charge)
+		if verbose {
+			log.Printf("created charge: %#v\n", charge)
+		}
 
 		successCsvRecords = append(successCsvRecords, record)
 		successDonatedAmount += charge.Amount

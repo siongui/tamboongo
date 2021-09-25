@@ -17,7 +17,7 @@ func ExampleMake20Donations(t *testing.T) {
 		return
 	}
 
-	err = MakeDonations(records[:20])
+	err = MakeDonations(records[:20], true)
 	if err != nil {
 		t.Error(err)
 		return
