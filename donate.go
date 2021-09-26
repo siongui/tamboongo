@@ -96,7 +96,7 @@ func chargeRoutine(client *omise.Client, record CsvRecord, cs, cf chan CsvRecord
 
 var apiAccessInterval = 200 * time.Millisecond
 
-// SetApiAccessInterval sets the interval between API access.
+// SetApiAccessInterval sets the interval (millisecond) between API access.
 func SetApiAccessInterval(ms int64) {
 	apiAccessInterval = time.Duration(ms) * time.Millisecond
 }

@@ -69,6 +69,28 @@ The following is the output:
   	Mrs. Pimpernel C Headstrong (THB 5068438)
 
 
+To see verbose ouput, run:
+
+.. code-block:: bash
+
+  $ go run commandline/tamboon.go -rot=fng.1000.csv.rot128 -verbose=true
+
+
+To make donations concurrently and see verbose output, run:
+
+.. code-block:: bash
+
+  $ go run commandline/tamboon.go -rot=fng.1000.csv.rot128 -concurrent=true -verbose=true
+
+
+To change the interval (for example, 500 millisecond) of making donations
+concurrently and see verbose output, run:
+
+.. code-block:: bash
+
+  $ go run commandline/tamboon.go -rot=fng.1000.csv.rot128 -concurrent=true -interval=500 -verbose=true
+
+
 UNLICENSE
 +++++++++
 
