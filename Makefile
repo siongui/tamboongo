@@ -7,7 +7,7 @@ commandline: fmt
 	cd commandline; go run tamboon.go -rot="../fng.1000.csv.rot128"
 
 test: fmt
-	go test -v
+	go test -v -race
 
 fmt:
 	go fmt *.go
